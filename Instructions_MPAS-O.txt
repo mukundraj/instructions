@@ -1,0 +1,39 @@
+Instructions for to install and run MPAS-O
+==========================================
+
+MPAS-O user's guide link: https://zenodo.org/record/1246893#.XBumzqlMGL5
+
+Step 1: Build dependencies
+
+	Netcdf 4.6.1
+	Netcdf-fortran 4.4.4
+	Parallel netcdf 1.7.0
+	Parallel IO (pio) 1.7.2
+		Configuration command for pio:
+		./configure --prefix /path/to/install/directory --disable-netcdf CC=gcc CXX=g++ FC=gfortran F77=gfortran F90=gfortran MPICC=mpicc MPICXX=mpicxx MPIFC=mpif90 MPIF77=mpif90 MPIF90=mpif90
+
+Step 2: Set environment variables
+
+	export NETCDF=path/to/netcdf-fortran-4.4.4/install/directory
+	export PNETCDF=path/to/pnetcdf-1.7.0/install/directory
+	export PIO=path/to/pio-1.7.2/install/directory
+
+Step 3: Download MPAS-O source and test folders
+
+	Source: https://github.com/MPAS-Dev/MPAS-Model/releases/tag/v6.0
+	Test case: https://zenodo.org/record/1252437/files/MPAS-O_V6.0_QU240.tar.gz
+	
+Step 4: Build MPAS
+
+	Enter source directory and enter following command:
+
+	>> make clean gfortran CORE=ocean
+
+	Then copy the executable "ocean_model" to the test case directory	
+
+Step 5: Run MPAS
+
+	Enter test case directory and enter the following command:
+
+	>> mpirun -np 16 ./ocean_model
+
