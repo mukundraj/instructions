@@ -5,12 +5,34 @@ MPAS-O user's guide link: https://zenodo.org/record/1246893#.XBumzqlMGL5
 
 Step 1: Build dependencies
 
-	Netcdf 4.6.1
 	Netcdf-fortran 4.4.4
+		
+		>> spack find --deps --long netcdf-fortran
+
+		netcdf-fortran@4.4.4
+	       ^netcdf@4.6.1
+	           ^hdf5@1.10.2
+	               ^mpich@3.2.1
+	               ^zlib@1.2.11
+
 	Parallel netcdf 1.7.0
+
+		>> spack find --deps --long parallel-netcdf
+
+	    parallel-netcdf@1.7.0
+	        ^mpich@3.2.1
+
+
 	Parallel IO (pio) 1.7.2
-		Configuration command for pio:
-		./configure --prefix /path/to/install/directory --disable-netcdf CC=gcc CXX=g++ FC=gfortran F77=gfortran F90=gfortran MPICC=mpicc MPICXX=mpicxx MPIFC=mpif90 MPIF77=mpif90 MPIF90=mpif90
+		
+		>> export NETCDF_PATH=/path/to/netcdf-fortran4.4.4
+		>> export PNETCDF_PATH=/path/to/parallel-netcdf1.7.0
+
+		>> ./configure --prefix=/nfs2/mraj/work/projects/ParallelIO-pio1_7_2/install3 --disable-netcdf CC=gcc CXX=g++ FC=gfortran F77=gfortran F90=gfortran MPICC=mpicc MPICXX=mpicxx MPIFC=mpif90 MPIF77=mpif90 MPIF90=mpif90 PNETCDF_PATH=/nfs2/mraj/work/sources/spack/opt/spack/linux-ubuntu14.04-x86_64/gcc-4.8/parallel-netcdf-1.7.0-uqw364cjhjfdp5hwhkgmsus5kryhka4t
+
+		>> make
+		>> make install
+
 
 Step 2: Set environment variables
 
