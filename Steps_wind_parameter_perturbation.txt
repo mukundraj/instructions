@@ -1,0 +1,22 @@
+
+1. Clone https://github.com/pwolfram/MPAS-Model.git
+
+2. Check out branch ocean/adds_wind_amp. Make sure hash of the commit starts with "243471f462f0" using "git rev-parse HEAD".
+
+3. Build MPAS as before: https://github.com/mukundraj/instructions/blob/master/Instructions_MPAS-O.txt
+
+4. Download the QU240 test case, unzip, and copy the mpas executable into the QU240 folder:
+	https://zenodo.org/record/1252437/files/MPAS-O_V6.0_QU240.tar.gz
+
+5. In the QU240 test case folder, locate the following statement:
+		config_flux_attenuation_coefficient_runoff = 0.001
+
+	then, add the following statement with the wind parameter in the following line:
+
+		config_bulk_wind_stress_amp = 5000.0
+
+	This is the wind parameter that needs to be perturbed.
+
+
+6. For a couple of different paramter values generate output to see if there are change in output values, range for "config_bulk_wind_stress_amp" is -Inf to +Inf. 
+
