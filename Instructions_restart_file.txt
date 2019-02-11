@@ -1,7 +1,7 @@
 Steps for restarting MPAS simulation
 =====================================
 
-1. Build and run an MPAS test case (e.g . QU240).
+1. Build MPAS and run a test case (e.g . QU240).
 
 2. In the test case folder, open streams.ocean and edit the following parameters:
 
@@ -19,4 +19,5 @@ config_do_restart = .true.
 config_start_time =  // set this to name of the restart file that you want to start from. e.g. '0001-01-02_00:00:00'
 config_run_duration = // set this to the run duration after starting from the restart file. e.g. '0001_12:00:00'
 
-6. Run simulation as usual using: mpirun -np nprocs ./ocean_model
+6. Run simulation as usual using: mpirun -np nprocs ./ocean_model. 
+This time simulation will use the specified restart file for initial conditions.
