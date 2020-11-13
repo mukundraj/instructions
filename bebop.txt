@@ -1,0 +1,48 @@
+Running MPAS-Ocean + Decaf + Decoupled Particle Tracer on Bebop
+===============================================================
+
+git clone https://github.com/mukundraj/mpas-decaf-ptrace.git
+cd mpas-decaf-ptrace
+git submodule init
+git submodule update
+cd decaf
+git checkout -b dyn-lbal origin/dyn-lbal
+cd ../MPAS-Model
+git checkout -b dyn-lbal origin/v6.0_decaf-hooks
+
+
+module load gcc/4.9.2-krnpzya
+module load cmake/3.13.4-354d6wl
+
+cd ../decaf && mkdir build && cd build
+make -j
+make install
+
+ccmake ..  -DCMAKE_INSTALL_PREFIX:PATH=../install -Dtransport_cci=off -DDIY_INCLUDE_DIRS=/home/mraj/libraries/diy/include -DBOOST_ROOT=/home/mraj/libraries/boost_1_65_1/install -DNETCDF_INCLUDE_DIR=/home/mraj/libs_mpas/install/include -DPNETCDF_DIR=/home/mraj/libs_mpas/install -DNetCDF_PREFIX=/home/mraj/libs_mpas/install_netcdf 
+
+make -j4
+
+cd TEST_CASE_FOLDER
+
+
+export DECAF_FOLDER=/home/mraj/tests/baseline2/mpas-decaf-ptrace/decaf/
+export BOOST_INSTALL_DIR=/home/mraj/libraries/boost_1_65_1/install/
+
+export NETCDF=/home/mraj/libs_mpas/install
+export PNETCDF=/home/mraj/libs_mpas/install
+export PIO=/home/mraj/libs_mpas/install
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DECAF_FOLDER/install/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BOOST_INSTALL_DIR/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/mraj/libs_mpas/mpich-3.2.1/install/lib/
+
+make clean gfortran CORE=ocean
+
+
+srun --pty -p knlall -t 01:00:00 /bin/bash
+
+
+srun -n 8 -l  --multi-prog my.config04
+srun -n 16 -l  --multi-prog my.config08
+srun -n 32 -l  --multi-prog my.config16
+srun -n 64 -l  --multi-prog my.config32
