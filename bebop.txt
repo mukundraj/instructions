@@ -38,6 +38,11 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/mraj/libs_mpas/mpich-3.2.1/install
 
 make clean gfortran CORE=ocean
 
+Use decaf/examples/ptrace/scripts/make_particle_file_ec.py to create particles.nc as follows:
+python /nfs/proj-tpeterka/mraj/datasets/MPAS-O_V6.0_EC60to30/make_particle_file_ec.py -i init.nc -g graph.info.part.32  -o particles/particles32.nc -p 32  -t “passive” --nvertlevel=2
+
+Use decaf/examples/ptrace/scripts/gs32.py to create decaf parameter files as follows: 
+python gs32.py
 
 srun --pty -p knlall -t 01:00:00 /bin/bash
 
