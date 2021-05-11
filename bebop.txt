@@ -2,6 +2,27 @@ Running MPAS-Ocean + Decaf + Decoupled Particle Tracer on Bebop
 ===============================================================
 
 git clone https://github.com/mukundraj/mpas-decaf-ptrace.git
+
+cd MPAS home folder
+
+export NETCDF=/home/mraj/libs_mpas/install
+export PNETCDF=/home/mraj/libs_mpas/install
+export PIO=/home/mraj/libs_mpas/install
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DECAF_FOLDER/install/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BOOST_INSTALL_DIR/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/mraj/libs_mpas/mpich-3.2.1/install/lib/
+
+make clean gfortran CORE=ocean
+
+Download TEST_CASE_FOLDER
+cd TEST_CASE_FOLDER folder
+
+mpirun -np 16 ../../ocean_model
+	- creates output.nc
+
+
+
 cd mpas-decaf-ptrace
 git submodule init
 git submodule update
@@ -22,7 +43,7 @@ ccmake ..  -DCMAKE_INSTALL_PREFIX:PATH=../install -Dtransport_cci=off -DDIY_INCL
 
 make -j4
 
-cd TEST_CASE_FOLDER
+cd MPAS_HOME_FOLDER folder
 
 
 export DECAF_FOLDER=/home/mraj/tests/baseline2/mpas-decaf-ptrace/decaf/
@@ -71,3 +92,6 @@ srun -n 8 -l  --multi-prog my.config04
 srun -n 16 -l  --multi-prog my.config08
 srun -n 32 -l  --multi-prog my.config16
 srun -n 64 -l  --multi-prog my.config32
+
+
+mpirun -np 16 ./ocean_model : -np 16 ./ptrace
