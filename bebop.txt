@@ -48,6 +48,19 @@ python gs32.py
 Use decaf/examples/ptrace/scripts/make_particle_file_ec.py to create particles.nc as follows:
 python /nfs/proj-tpeterka/mraj/datasets/MPAS-O_V6.0_EC60to30/make_particle_file_ec.py -i init.nc -g graph.info.part.32  -o particles/particles32.nc -p 32  -t “passive” --nvertlevel=2
 
+Update the output stream in streams.ocean in TEST_CASE_FOLDER with the following: 
+
+   <var name="velocityX"/>
+   <var name="velocityY"/>
+   <var name="velocityZ"/>
+   <var name="zMid"/>
+   <var name="zTop"/>
+   <var name="vertVelocityTop"/>
+   <var name="uVertexVelocity"/>
+   <var name="vVertexVelocity"/>
+   <var name="wVertexVelocity"/>
+   <var name="boundaryVertex"/>
+
 	
 
 
