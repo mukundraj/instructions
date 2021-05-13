@@ -20,6 +20,7 @@ cd TEST_CASE_FOLDER folder
 
 mpirun -np 16 ../../ocean_model
 	- creates output.nc
+create a copy named output2.nc from file output.nc
 
 
 
