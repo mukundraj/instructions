@@ -1,20 +1,29 @@
-## set up github - one time only (for osx)
+## install docker client and set up github - one time only (osx instructions here)
 
-**step 1:** Register for github
+**step 1** Download and install docker client
 
-**step 2:** Run following commands in terminal
+**step 2:** Register for github
+
+**step 3:** Run following commands in terminal
 
     ssh-keygen -t ed25519 -C "your_email@example.com"
     eval "$(ssh-agent -s)"
     open ~/.ssh/config
 
-**step 3:** copy following text to open config file, then save and exit editor.
+**step 4:** copy following text to open config file, then save and exit editor.
 
     Host *
       AddKeysToAgent yes
       UseKeychain yes
       IdentityFile ~/.ssh/id_ed25519
 
+**step 5** copy the public key to clipbord
+
+    pbcopy < ~/.ssh/id_ed25519.pub
+
+**step 6** provide public key to github using following instructions - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+**step 7** install xcode if not installed
 
 ## to set up portal locally for the first time
 
