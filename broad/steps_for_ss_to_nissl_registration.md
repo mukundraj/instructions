@@ -1,5 +1,8 @@
 ## Steps for Slide Seq image to Nissl image registration
 
+### Sample data
+- A pair of nissl and slide seq images : https://drive.google.com/drive/folders/1ggUoXABG-rOzSkb2LF0Y1FIUsbFvPhfI?usp=sharing
+
 ### Prerequisite tools and preparation before alignment and registration
 
 - Install Slicer 3D from https://www.slicer.org/
