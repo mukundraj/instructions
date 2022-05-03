@@ -55,5 +55,14 @@
 
 ## to start and stop portal for routine analysis
 
+**step 1** run following command in terminal
+
     docker-compose start
+
+**step 2** run following command in browser
+    
+    localhost:8000
+
+**step 3** run following command in terminal
+
     docker-compose stop
